@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Obsidian Minimal Luxe Design System */
+
+@layer base {
+  :root {
+    /* Pitch Black Base */
+    --background: 0 0% 0%;
+    --foreground: 0 0% 96%;
+    
+    /* Charcoal Secondary */
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 96%;
+    
+    /* Soft Silver Accent */
+    --primary: 0 0% 66%;
+    --primary-foreground: 0 0% 0%;
+    
+    /* Secondary Surface */
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 96%;
+    
+    /* Muted Elements */
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 66%;
+    
+    --accent: 0 0% 66%;
+    --accent-foreground: 0 0% 0%;
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 96%;
+    
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 0 0% 66%;
+    
+    --radius: 0rem;
+    
+    /* Shadows */
+    --shadow-minimal: 0 1px 3px rgba(0, 0, 0, 0.5);
+    
+    /* Animations */
+    --transition-smooth: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-feature-settings: "cv11", "ss01";
+    font-variation-settings: "opsz" 32;
+    letter-spacing: -0.01em;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tighter;
+    letter-spacing: -0.03em;
+  }
+}
+
+@layer utilities {
+  .luxe-divider {
+    border-top: 1px solid hsl(var(--border));
+  }
+  
+  .fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .section-spacing {
+    @apply py-32;
+  }
+  
+  .container-luxe {
+    @apply max-w-7xl mx-auto px-8;
+  }
+}
