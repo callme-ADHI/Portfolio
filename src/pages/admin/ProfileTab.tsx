@@ -14,21 +14,21 @@ const ProfileTab = () => {
   const [currentImageUrl, setCurrentImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
-  
+
   useEffect(() => {
     loadProfile();
   }, []);
-  
+
   const loadProfile = async () => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
-    
+
     const { data } = await supabase
       .from("profiles")
       .select("*")
       .eq("id", user.id)
       .single();
-    
+
     if (data) {
       setFullName(data.full_name || "");
       setEmail(data.email || "");
@@ -36,40 +36,40 @@ const ProfileTab = () => {
       setCurrentImageUrl(data.profile_image_url || "");
     }
   };
-  
+
   const handleImageUpload = async (file: File) => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return null;
-    
+
     const fileExt = file.name.split('.').pop();
     const fileName = `${user.id}-${Date.now()}.${fileExt}`;
-    
+
     const { error: uploadError } = await supabase.storage
       .from('profile-images')
       .upload(fileName, file);
-    
+
     if (uploadError) throw uploadError;
-    
+
     const { data: { publicUrl } } = supabase.storage
       .from('profile-images')
       .getPublicUrl(fileName);
-    
+
     return publicUrl;
   };
-  
+
   const handleSave = async () => {
     setLoading(true);
-    
+
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("Not authenticated");
-      
+
       let imageUrl = currentImageUrl;
-      
+
       if (profileImage) {
         imageUrl = await handleImageUpload(profileImage) || currentImageUrl;
       }
-      
+
       const { error } = await supabase
         .from("profiles")
         .upsert({
@@ -79,14 +79,14 @@ const ProfileTab = () => {
           title: title,
           profile_image_url: imageUrl,
         });
-      
+
       if (error) throw error;
-      
+
       toast({
         title: "Success!",
         description: "Profile updated successfully",
       });
-      
+
       loadProfile();
     } catch (error: any) {
       toast({
@@ -95,10 +95,10 @@ const ProfileTab = () => {
         variant: "destructive",
       });
     }
-    
+
     setLoading(false);
   };
-  
+
   return (
     <Card>
       <CardHeader>
@@ -112,10 +112,10 @@ const ProfileTab = () => {
             id="fullName"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
-            placeholder="Your Name"
+            placeholder="Adhithyakrishna R"
           />
         </div>
-        
+
         <div className="space-y-2">
           <Label htmlFor="email">Email (Read-only)</Label>
           <Input
@@ -124,7 +124,7 @@ const ProfileTab = () => {
             disabled
           />
         </div>
-        
+
         <div className="space-y-2">
           <Label htmlFor="title">Animated Title (use | to separate)</Label>
           <Input
@@ -137,7 +137,7 @@ const ProfileTab = () => {
             Separate titles with | (pipe) character for animation
           </p>
         </div>
-        
+
         <div className="space-y-2">
           <Label htmlFor="profileImage">Profile Picture</Label>
           {currentImageUrl && (
@@ -154,7 +154,7 @@ const ProfileTab = () => {
             onChange={(e) => setProfileImage(e.target.files?.[0] || null)}
           />
         </div>
-        
+
         <Button onClick={handleSave} disabled={loading} className="w-full">
           {loading ? "Saving..." : "Save Changes"}
         </Button>

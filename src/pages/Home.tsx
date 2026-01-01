@@ -21,7 +21,7 @@ const Home = () => {
         .from("profiles")
         .select("*")
         .maybeSingle();
-      
+
       if (error) throw error;
       return data;
     },
@@ -35,7 +35,7 @@ const Home = () => {
         .select("*")
         .eq("section", "parallax_sections")
         .maybeSingle();
-      
+
       if (error) throw error;
       return data?.content || {
         featured_work_title: "Featured Work",
@@ -56,12 +56,12 @@ const Home = () => {
         .eq("featured", true)
         .order("display_order")
         .limit(6);
-      
+
       if (error) throw error;
       return data;
     },
   });
-  
+
   const { data: heroStats } = useQuery({
     queryKey: ["hero-stats"],
     queryFn: async () => {
@@ -69,12 +69,12 @@ const Home = () => {
         .from("hero_stats")
         .select("*")
         .order("display_order");
-      
+
       if (error) throw error;
       return data;
     },
   });
-  
+
   const { data: resume } = useQuery({
     queryKey: ["resume"],
     queryFn: async () => {
@@ -84,18 +84,18 @@ const Home = () => {
         .order("updated_at", { ascending: false })
         .limit(1)
         .maybeSingle();
-      
+
       if (error) throw error;
       return data;
     },
   });
-  
+
   const titles = profile?.title ? profile.title.split("|").map(t => t.trim()) : ["Innovator", "Problem Solver"];
-  
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Navigation />
-      
+
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative min-h-screen flex items-center pt-20 overflow-visible">
@@ -123,20 +123,20 @@ const Home = () => {
                     />
                   </motion.div>
                 )}
-                
+
                 {/* Main Content */}
                 <div className="space-y-12">
                   <div className="space-y-8">
-                    <motion.h1 
+                    <motion.h1
                       className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight break-words"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.5, duration: 0.8 }}
                     >
-                      {profile?.full_name || "Your Name"}
+                      {profile?.full_name || "Adhithyakrishna R"}
                     </motion.h1>
-                    
-                    <motion.div 
+
+                    <motion.div
                       className="text-2xl md:text-3xl text-muted-foreground font-light"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -145,8 +145,8 @@ const Home = () => {
                       {titles[0]}
                     </motion.div>
                   </div>
-                
-                  
+
+
                   {/* Stats Grid */}
                   {heroStats && heroStats.length > 0 && (
                     <motion.div
@@ -173,7 +173,7 @@ const Home = () => {
                       ))}
                     </motion.div>
                   )}
-                  
+
                   {/* CTA Buttons */}
                   <motion.div
                     initial={{ opacity: 0 }}
@@ -182,8 +182,8 @@ const Home = () => {
                     className="flex flex-col sm:flex-row gap-4 pt-8"
                   >
                     <Link to="/projects">
-                      <Button 
-                        size="lg" 
+                      <Button
+                        size="lg"
                         className="bg-foreground text-background hover:bg-foreground/90 rounded-none h-14 px-8 font-medium transition-all duration-300"
                       >
                         View Work
@@ -191,9 +191,9 @@ const Home = () => {
                       </Button>
                     </Link>
                     <Link to="/contact">
-                      <Button 
-                        size="lg" 
-                        variant="outline" 
+                      <Button
+                        size="lg"
+                        variant="outline"
                         className="border-border text-foreground hover:bg-foreground hover:text-background rounded-none h-14 px-8 font-medium transition-all duration-300"
                       >
                         Contact
@@ -201,8 +201,8 @@ const Home = () => {
                     </Link>
                     {resume && (
                       <a href={resume.file_url} download target="_blank" rel="noopener noreferrer">
-                        <Button 
-                          size="lg" 
+                        <Button
+                          size="lg"
                           variant="outline"
                           className="border-border text-muted-foreground hover:text-foreground hover:border-foreground rounded-none h-14 px-8 font-medium transition-all duration-300"
                         >
@@ -253,15 +253,15 @@ const Home = () => {
                   {(homeContent as any)?.featured_work_description || "Explore innovative solutions crafted with precision and creativity."}
                 </p>
                 <Link to="/projects">
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     className="border-foreground text-foreground hover:bg-foreground hover:text-background mt-4"
                   >
                     VIEW PROJECTS
                   </Button>
                 </Link>
               </motion.div>
-              
+
               {/* Featured Projects Grid - 2 per row, alternating animations */}
               {featuredProjects && featuredProjects.length > 0 && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
@@ -271,7 +271,7 @@ const Home = () => {
                       initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true, amount: 0.3 }}
-                      transition={{ 
+                      transition={{
                         duration: 0.8,
                         delay: 0.1 * (index % 2),
                         ease: [0.4, 0, 0.2, 1]
@@ -279,8 +279,8 @@ const Home = () => {
                     >
                       <Link to={`/project/${project.id}`} className="group block">
                         <div className="aspect-video overflow-hidden border border-border bg-card">
-                          <img 
-                            src={project.thumbnail_url || ""} 
+                          <img
+                            src={project.thumbnail_url || ""}
                             alt={project.title}
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                           />
@@ -310,8 +310,8 @@ const Home = () => {
             >
               {(homeContent as any)?.philosophy_image_url && (
                 <div className="aspect-square border border-border overflow-hidden">
-                  <img 
-                    src={(homeContent as any).philosophy_image_url} 
+                  <img
+                    src={(homeContent as any).philosophy_image_url}
                     alt="Philosophy"
                     className="w-full h-full object-cover"
                   />
@@ -329,7 +329,7 @@ const Home = () => {
           </div>
         </motion.section>
       </main>
-      
+
       <Footer />
     </div>
   );
