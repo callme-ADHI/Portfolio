@@ -19,9 +19,9 @@ jobs:
 
       - name: Install and Build
         env:
-          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
-          VITE_SUPABASE_PROJECT_ID: ${{ secrets.VITE_SUPABASE_PROJECT_ID }}
+          VITE_SUPABASE_URL: "https://nmioehwnmclzujbcyliz.supabase.co"
+          VITE_SUPABASE_PUBLISHABLE_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5taW9laHdubWNsenVqYmN5bGl6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIxNDMzMzYsImV4cCI6MjA3NzcxOTMzNn0.AXLCRlR1j2LL1hvgI0N6hC_SxzQcrdUMihDKdSJCWqQ"
+          VITE_SUPABASE_PROJECT_ID: "nmioehwnmclzujbcyliz"
         run: |
           npm ci
           npm run build
