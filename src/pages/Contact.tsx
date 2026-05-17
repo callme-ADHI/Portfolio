@@ -26,6 +26,22 @@ const contactSchema = z.object({
   message: z.string().trim().min(1, "Message is required").max(1000),
 });
 
+const getFormattedUrl = (platform: string, url: string, phone?: string | null) => {
+  const cleanPlatform = platform.toLowerCase();
+  if (cleanPlatform === 'email') {
+    return url.startsWith('mailto:') ? url : `mailto:${url}`;
+  }
+  if (cleanPlatform === 'whatsapp') {
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      return url;
+    }
+    const targetNumber = phone || url;
+    const cleanNumber = targetNumber.replace(/[^0-9]/g, '');
+    return `https://wa.me/${cleanNumber}`;
+  }
+  return url;
+};
+
 const Contact = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
@@ -103,7 +119,7 @@ const Contact = () => {
             {/* Header */}
             <div>
               <motion.h1 
-                className="text-7xl md:text-9xl font-bold text-foreground leading-none mb-12"
+                className="text-5xl sm:text-7xl md:text-9xl font-bold text-foreground leading-none mb-12"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.8 }}
@@ -126,13 +142,13 @@ const Contact = () => {
                   return (
                     <motion.a
                       key={item.id}
-                      href={item.url}
+                      href={getFormattedUrl(item.platform, item.url, item.phone)}
                       target="_blank"
                       rel="noopener noreferrer"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.5 + index * 0.1 }}
-                      className="bg-background p-8 hover:bg-card transition-colors duration-300 group"
+                      className="bg-background p-6 sm:p-8 hover:bg-card transition-colors duration-300 group"
                     >
                       <div className="flex items-center gap-4">
                         <Icon size={24} strokeWidth={1.5} className="text-muted-foreground group-hover:text-foreground transition-colors duration-300" />

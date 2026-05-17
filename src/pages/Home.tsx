@@ -106,7 +106,7 @@ const Home = () => {
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: [0.4, 0, 0.2, 1] }}
-                className="space-y-16 max-w-4xl"
+                className="space-y-16 max-w-4xl text-center xl:text-left"
               >
                 {/* Profile Image */}
                 {profile?.profile_image_url && (
@@ -161,12 +161,12 @@ const Home = () => {
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 1.3 + index * 0.1, duration: 0.6 }}
-                          className="bg-background p-8 hover:bg-card transition-colors duration-300"
+                          className="bg-background p-6 md:p-8 hover:bg-card transition-colors duration-300 text-center xl:text-left"
                         >
-                          <div className="text-4xl font-bold text-foreground mb-2 tracking-tighter">
+                          <div className="text-3xl md:text-4xl font-bold text-foreground mb-2 tracking-tighter">
                             {stat.value}
                           </div>
-                          <div className="text-sm text-muted-foreground uppercase tracking-wider">
+                          <div className="text-xs md:text-sm text-muted-foreground uppercase tracking-wider">
                             {stat.label}
                           </div>
                         </motion.div>
@@ -179,7 +179,7 @@ const Home = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1.5, duration: 0.8 }}
-                    className="flex flex-col sm:flex-row gap-4 pt-8"
+                    className="flex flex-col sm:flex-row justify-center xl:justify-start gap-4 pt-8"
                   >
                     <Link to="/projects">
                       <Button
@@ -246,10 +246,10 @@ const Home = () => {
                 transition={{ duration: 0.8 }}
                 className="text-center space-y-6"
               >
-                <h2 className="text-5xl md:text-6xl font-bold text-foreground">
+                <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold text-foreground">
                   {(homeContent as any)?.featured_work_title || "Featured Work"}
                 </h2>
-                <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+                <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto px-4">
                   {(homeContent as any)?.featured_work_description || "Explore innovative solutions crafted with precision and creativity."}
                 </p>
                 <Link to="/projects">
@@ -264,7 +264,7 @@ const Home = () => {
 
               {/* Featured Projects Grid - 2 per row, alternating animations */}
               {featuredProjects && featuredProjects.length > 0 && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 px-4 md:px-0">
                   {featuredProjects.map((project: any, index: number) => (
                     <motion.div
                       key={project.id}
@@ -306,10 +306,10 @@ const Home = () => {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center text-center lg:text-left px-4 md:px-0"
             >
               {(homeContent as any)?.philosophy_image_url && (
-                <div className="aspect-square border border-border overflow-hidden">
+                <div className="aspect-square border border-border overflow-hidden max-w-md mx-auto w-full">
                   <img
                     src={(homeContent as any).philosophy_image_url}
                     alt="Philosophy"
@@ -318,7 +318,7 @@ const Home = () => {
                 </div>
               )}
               <div className="space-y-6">
-                <h2 className="text-5xl md:text-6xl font-bold text-foreground">
+                <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold text-foreground">
                   {(homeContent as any)?.philosophy_title || "Philosophy"}
                 </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">

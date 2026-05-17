@@ -90,6 +90,6 @@
   }
   
   .container-luxe {
-    @apply max-w-7xl mx-auto px-8;
+    @apply max-w-7xl mx-auto px-4 sm:px-8;
   }
 }

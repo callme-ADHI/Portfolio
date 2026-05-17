@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { Github, Linkedin, Mail, Instagram, Twitter } from "lucide-react";
+import { Github, Linkedin, Mail, Instagram, Twitter, Phone } from "lucide-react";
 
 const iconMap: Record<string, any> = {
   Github,
@@ -9,6 +9,23 @@ const iconMap: Record<string, any> = {
   Mail,
   Instagram,
   Twitter,
+  Phone,
+};
+
+const getFormattedUrl = (platform: string, url: string, phone?: string | null) => {
+  const cleanPlatform = platform.toLowerCase();
+  if (cleanPlatform === 'email') {
+    return url.startsWith('mailto:') ? url : `mailto:${url}`;
+  }
+  if (cleanPlatform === 'whatsapp') {
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      return url;
+    }
+    const targetNumber = phone || url;
+    const cleanNumber = targetNumber.replace(/[^0-9]/g, '');
+    return `https://wa.me/${cleanNumber}`;
+  }
+  return url;
 };
 
 const Footer = () => {
@@ -46,7 +63,7 @@ const Footer = () => {
                 return (
                   <a
                     key={item.id}
-                    href={item.url}
+                    href={getFormattedUrl(item.platform, item.url, item.phone)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-muted-foreground hover:text-foreground transition-colors duration-300"

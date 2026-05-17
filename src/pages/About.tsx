@@ -37,7 +37,7 @@ const About = () => {
             {/* Header */}
             <div>
               <motion.h1 
-                className="text-7xl md:text-9xl font-bold text-foreground leading-none mb-12"
+                className="text-5xl sm:text-7xl md:text-9xl font-bold text-foreground leading-none mb-12"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.8 }}
@@ -56,7 +56,7 @@ const About = () => {
                 className="space-y-6"
               >
                 <h2 className="text-sm uppercase tracking-widest text-muted-foreground">Biography</h2>
-                <p className="text-2xl md:text-3xl leading-relaxed text-foreground font-light whitespace-pre-wrap">
+                <p className="text-xl sm:text-2xl md:text-3xl leading-relaxed text-foreground font-light whitespace-pre-wrap">
                   {aboutContent.bio}
                 </p>
               </motion.div>

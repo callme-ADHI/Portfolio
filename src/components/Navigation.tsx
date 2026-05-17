@@ -1,5 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Menu } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetClose,
+} from "@/components/ui/sheet";
 
 const Navigation = () => {
   const location = useLocation();
@@ -26,7 +33,8 @@ const Navigation = () => {
             Portfolio
           </Link>
           
-          <div className="flex items-center gap-12">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-12">
             {navItems.map((item) => (
               <Link
                 key={item.path}
@@ -40,6 +48,35 @@ const Navigation = () => {
                 {item.name}
               </Link>
             ))}
+          </div>
+
+          {/* Mobile Navigation */}
+          <div className="md:hidden">
+            <Sheet>
+              <SheetTrigger asChild>
+                <button className="text-foreground hover:text-muted-foreground transition-colors duration-300 p-2 focus:outline-none" aria-label="Open menu">
+                  <Menu size={24} />
+                </button>
+              </SheetTrigger>
+              <SheetContent side="right" className="bg-background/95 backdrop-blur-md border-l border-border w-64 p-8">
+                <div className="flex flex-col gap-8 mt-12">
+                  {navItems.map((item) => (
+                    <SheetClose asChild key={item.path}>
+                      <Link
+                        to={item.path}
+                        className={`text-lg font-medium tracking-widest uppercase transition-colors duration-300 ${
+                          isActive(item.path)
+                            ? "text-foreground"
+                            : "text-muted-foreground hover:text-foreground"
+                        }`}
+                      >
+                        {item.name}
+                      </Link>
+                    </SheetClose>
+                  ))}
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </div>

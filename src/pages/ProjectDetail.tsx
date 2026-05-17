@@ -64,7 +64,7 @@ const ProjectDetail = () => {
             className="space-y-8"
           >
             <div>
-              <h1 className="text-5xl font-bold mb-4 glow-text">{project.title}</h1>
+              <h1 className="text-3xl sm:text-5xl font-bold mb-4 glow-text">{project.title}</h1>
               <div className="flex flex-wrap gap-2 mb-6">
                 {project.tags?.map((tag: string, index: number) => (
                   <span
@@ -92,7 +92,7 @@ const ProjectDetail = () => {
               </motion.div>
             )}
             
-            <div className="bg-card border border-border rounded-xl p-8">
+            <div className="bg-card border border-border rounded-xl p-6 sm:p-8">
               <h2 className="text-2xl font-bold mb-4 text-primary">Description</h2>
               <p className="text-lg leading-relaxed text-muted-foreground whitespace-pre-wrap">
                 {project.detailed_description || project.description}

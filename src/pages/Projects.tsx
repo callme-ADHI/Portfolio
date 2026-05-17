@@ -51,7 +51,7 @@ const Projects = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             >
-              <h1 className="text-7xl md:text-9xl font-bold text-foreground leading-none mb-12">
+              <h1 className="text-5xl sm:text-7xl md:text-9xl font-bold text-foreground leading-none mb-12">
                 Projects
               </h1>
               <motion.div 
@@ -127,7 +127,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
       onMouseLeave={() => setIsHovered(false)}
     >
       <Link to={`/project/${project.id}`} className="block">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-6 sm:p-8 lg:p-12">
           {/* Left - Number & Info */}
           <motion.div 
             className="lg:col-span-5 space-y-6"
