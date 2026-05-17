@@ -7,6 +7,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import NixieClock from "@/components/NixieClock";
 import AnimatedText from "@/components/AnimatedText";
+import ParticleText from "@/components/ParticleText";
 import { ArrowRight } from "lucide-react";
 
 const Home = () => {
@@ -127,14 +128,14 @@ const Home = () => {
                 {/* Main Content */}
                 <div className="space-y-12">
                   <div className="space-y-8">
-                    <motion.h1
-                      className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight break-words"
+                    <motion.div
+                      className="w-full h-[180px] md:h-[220px] flex items-center justify-center xl:justify-start overflow-hidden pointer-events-auto"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.5, duration: 0.8 }}
                     >
-                      {profile?.full_name || "Adhithyakrishna R"}
-                    </motion.h1>
+                      <ParticleText name={profile?.full_name || "Adhithyakrishna R"} />
+                    </motion.div>
 
                     <motion.div
                       className="text-2xl md:text-3xl text-muted-foreground font-light"
